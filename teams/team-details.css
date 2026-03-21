@@ -1,0 +1,90 @@
+/* Estilo específico para a página de detalhes */
+
+.details-page {
+    overflow-y: auto; /* Aqui permitimos o scroll normal para ler a história */
+    scroll-snap-type: none; 
+}
+
+.header-details {
+    background: rgba(0,0,0,0.4);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.back-button {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8em;
+}
+
+.hero-details {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.hero-details h1 {
+    font-size: 10vw;
+    font-weight: 900;
+    line-height: 0.8;
+    margin-bottom: 12px;
+}
+
+.main-car-img {
+    width: 80%;
+    max-width: 1000px;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5));
+    margin-top: -50px; /* Faz o carro "subir" sobre o título */
+}
+
+/* Grade de Specs com efeito de vidro */
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 50px 10%;
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+}
+
+.spec-item span {
+    font-size: 0.8em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+}
+
+.spec-item h3 {
+    font-size: 1.8em;
+    margin-top: 10px;
+}
+
+/* Pilotos */
+.drivers-section {
+    padding: 50px 10%;
+    text-align: center;
+}
+
+.drivers-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.driver-card img {
+    width: 200px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}

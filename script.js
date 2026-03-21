@@ -1,18 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('.full-page');
-    const body = document.body;
+    
+    const observerOptions = {
+        threshold: 0.5 // Ativa quando 50% da seção estiver na tela
+    };
 
-    const colorObserver = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Se a seção tiver um data-color, usa ele. Se não (Intro), volta pro cinza.
+                // 1. Muda a cor de fundo
                 const newColor = entry.target.getAttribute('data-color') || '#1a1a1a';
-                body.style.backgroundColor = newColor;
+                document.body.style.backgroundColor = newColor;
+
+                // 2. Adiciona a classe 'active' para disparar a subida do conteúdo
+                entry.target.classList.add('active');
+            } else {
+                // Opcional: Remove a classe ao sair para animar de novo quando voltar
+                entry.target.classList.remove('active');
             }
         });
-    }, { threshold: 0.4 }); // Ativa quando 40% da tela estiver à amostra;
+    }, observerOptions);
 
     sections.forEach(section => {
-        colorObserver.observe(section);
+        observer.observe(section);
     });
+
+
 });

@@ -1,11 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Scuderia Ferrari - Detalhes Técnicos</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="team-details.css">
 </head>
-<body>
-    
+<body class="details-page" style="background-color: #e10600;">
+
+    <header class="header-details">
+        <a href="../index.html" class="back-button">← Voltar</a>
+        <img src="../logo-ferrari-white.png" alt="Logo Ferrari" class="mini-logo">
+    </header>
+
+    <main>
+        <section class="hero-details">
+            <div class="hero-text">
+                <h1>SF-24</h1>
+                <p>A evolução da aerodinâmica e potência italiana.</p>
+            </div>
+            <img src="../carro-ferrari-front.png" alt="Ferrari SF-24" class="main-car-img">
+        </section>
+
+        <section class="specs-grid">
+            <div class="spec-item glass">
+                <span>Potência</span>
+                <h3 class="counter" data-target="1000">0</h3> <span class="unit">cv</span>
+            </div>
+            <div class="spec-item glass">
+                <span>Velocidade Máx</span>
+                <h3 class="counter" data-target="340">0</h3>
+                <span class="unit">km/h</span>
+            </div>
+            <div class="spec-item glass">
+                <span>Motor</span>
+                <h3>V6 Turbo Híbrido</h3>
+            </div>
+            <div class="spec-item glass">
+                <span>0-100 km/h</span>
+                <h3>2.1s</h3>
+            </div>
+        </section>
+
+        <section class="drivers-section">
+            <h2>Line-up Atual</h2>
+            <div class="drivers-container">
+                <div class="driver-card glass">
+                    <img src="../leclerc.png" alt="Charles Leclerc">
+                    <h4>Charles Leclerc</h4>
+                </div>
+                <div class="driver-card glass">
+                    <img src="../hamilton.png" alt="Lewis Hamilton">
+                    <h4>Lewis Hamilton</h4>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="team-logic.js"></script>
 </body>
 </html>

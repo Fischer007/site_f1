@@ -18,11 +18,31 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Estado inicial: Escondido e um pouco abaixo */
+.team-info, .team-image {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); /* Curva suave de movimento */
+}
+
+/* Estado final: Visível e no lugar (Ativado pelo JS) */
+.team-section.active .team-info,
+.team-section.active .team-image {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Pequeno atraso na imagem para não subir tudo junto (mais elegante) */
+.team-section.active .team-image {
+    transition-delay: 0.2s;
+}
+
+/* Ajuste no body para a cor de fundo também ser suave */
 body {
     font-family: 'Inter', sans-serif;
     color: white;
     background-color: #1a1a1a; /* Cor inicial */
-    transition: background-color 0.8s ease; /* Transição suave da cor de fundo */
+    transition: background-color 1.2s cubic-bezier(0.4, 0, 0.2, 1);; /* Transição suave da cor de fundo */
 }
 
 /* Header Fixo e Transparente */
