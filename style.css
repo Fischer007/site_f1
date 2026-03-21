@@ -100,6 +100,7 @@ html {
     transition-delay: 0.2s;
 }
 
+
 /* Ajuste no body para a cor de fundo também ser suave */
 body {
     font-family: 'Inter', sans-serif;
@@ -140,7 +141,7 @@ nav a {
     color: white;
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.9em;
 }
 
 /* Seções de Tela Cheia */
@@ -155,12 +156,126 @@ nav a {
     padding: 20px;
 }
 
+/* --- INTRO RE-DESIGN --- */
 .intro {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('link-da-sua-imagem-de-pista.jpg');
-    background-size: cover;
-    background-position: center;
     position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Corta o que sobrar do texto gigante */
+    background: #000;
+}
+
+/* Overlay para escurecer a imagem e destacar o texto */
+.overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
+    z-index: 1;
+}
+
+/* Imagem de Fundo Dinâmica e Responsiva */
+.bg-dynamic {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* A mágica: preenche a tela sem esticar a foto */
+    opacity: 0.4; /* Deixa escura para o texto brilhar */
+    z-index: 0;
+}
+
+.marquee {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    z-index: 2; /* Fica atrás do conteúdo (z-index 10) */
+    opacity: 0.1; /* Bem discreto */
+    pointer-events: none;
     overflow: hidden;
+}
+
+.marquee span {
+    display: inline-block;
+    font-size: 20vw;
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1px #fff;
+    white-space: nowrap;
+    padding-left: 100%; /* Empurra o início para fora da tela */
+    animation: marquee-run 25s linear infinite;
+}
+
+@keyframes marquee-run {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* Conteúdo Principal */
+.intro-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+.main-title {
+    font-size: clamp(5rem, 18vw, 12rem);
+    font-weight: 900;
+    line-height: 0.8;
+    letter-spacing: -8px; /* Deixa as letras "coladas" - estilo F1 */
+    color: #fff;
+    margin: 0;
+}
+
+.sub-title {
+    font-size: clamp(1em, 4vw, 2.5em);
+    font-weight: 400;
+    color: var(--f1-red);
+    text-transform: uppercase;
+    letter-spacing: 10px; /* Aqui o espaçamento largo funciona bem */
+    margin-top: 5px;
+}
+
+.intro-content p {
+    margin-top: 20px;
+    font-weight: 300;
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+.intro h2 {
+    font-size: clamp(3em, 10vw, 8rem); /* Responsividade extrema no texto */
+    color: var(--f1-red);
+    line-height: 1;
+    margin-bottom: 1em;
+}
+
+/* Indicador de Scroll Animado */
+.scroll-indicator {
+    margin-top: 50px;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    opacity: 0.6;
+}
+
+.arrow {
+    width: 2px;
+    height: 50px;
+    background: var(--f1-red);
+    margin: 10px auto;
+    animation: arrow-down 2s infinite;
+}
+
+@keyframes arrow-down {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
 }
 
 /* Título de Introdução */
@@ -172,23 +287,6 @@ nav a {
     letter-spacing: -2px;
     text-shadow: 0 10px 30px rgba(0,0,0,0.5);
     z-index: 1;
-}
-
-/* Texto Gigante de Fundo (Outline) */
-.intro::before {
-    content: "F1 2026";
-    position: absolute;
-    font-size: 20vw;
-    font-weight: 900;
-    color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
-    z-index: 1;
-    white-space: nowrap;
-}
-
-.intro h2 {
-    color: var(--f1-red); /* Mudando a cor para vermelho destaque */
-    
 }
 
 /* Conteúdo do Time (O "Card" Gigante) */
