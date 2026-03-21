@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    // ---MENU Cellphone Function---
+    const menu = document.querySelector('#mobile-menu');
+    const menuLinks = document.querySelector('.nav-list');
+
+    menu.addEventListener('click', function() {
+    // toggle() adiciona a classe se ela não existe, e remove se existe
+    menu.classList.toggle('is-active');
+    menuLinks.classList.toggle('active');
+    });
+
+
+
     
     // 1. Selecionamos os contadores
     const counters = document.querySelectorAll('.counter');
@@ -35,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- EFEITO PARALLAX NO CARRO ---
     const carImage = document.querySelector('.main-car-img');
-
     // Verificamos se a imagem do carro existe na página antes de rodar
     if (carImage) {
         document.addEventListener('mousemove', (e) => {

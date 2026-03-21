@@ -33,6 +33,7 @@
     font-weight: 900;
     line-height: 0.8;
     margin-bottom: 12px;
+    perspective: 1000px; /* Cria a profundidade para o 3D funcionar */
 }
 
 .main-car-img {
@@ -40,6 +41,9 @@
     max-width: 1000px;
     filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5));
     margin-top: -50px; /* Faz o carro "subir" sobre o título */
+    transition: transform 0.1s ease-out; /* Deixa o movimento do mouse fluido */
+    transform-style: preserve-3d;
+    will-change: transform; /* Avisa ao navegador para otimizar essa imagem */
 }
 
 /* Grade de Specs com efeito de vidro */
@@ -87,4 +91,94 @@
     width: 200px;
     border-radius: 15px;
     margin-bottom: 15px;
+}
+
+/* --- RESPONSIVIDADE (Celulares) MENU --- */
+@media (max-width: 768px) {
+    /* 1. Esconde a lista padrão e transforma em um menu lateral */
+    .nav-list {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Começa fora da tela */
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(20px);
+        width: 70%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+        z-index: 999;
+    }
+
+    /* Quando o menu estiver ativo, ele volta para a tela */
+    .nav-list.active {
+        right: 0;
+    }
+
+    /* 2. Estilo das Barrinhas (Hambúrguer) */
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+        z-index: 1001;
+    }
+
+    .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        background-color: white;
+        transition: 0.3s;
+    }
+
+    /* 3. Animação de X quando o menu abre */
+    #mobile-menu.is-active .bar:nth-child(2) { opacity: 0; }
+    #mobile-menu.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    #mobile-menu.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
+
+
+.engineering-section {
+    padding: 80px 10%;
+    background: rgba(0,0,0,0.2);
+}
+
+.section-title {
+    font-size: 3em;
+    margin-bottom: 50px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.eng-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.eng-card {
+    padding: 40px;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.eng-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.02);
+}
+
+.eng-icon {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.eng-card h3 {
+    color: var(--f1-red);
+    margin-bottom: 15px;
+}
+
+.eng-card p {
+    line-height: 1.6;
+    color: #ccc;
 }

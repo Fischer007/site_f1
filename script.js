@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('load', () => {
+        const loader = document.getElementById('loader');
+        // Pequeno delay para garantir que o usuário veja a animação
+        setTimeout(() => {
+            loader.classList.add('hidden');
+        }, 2500);
+    })
+
+
     const sections = document.querySelectorAll('.full-page');
-    
+
     const observerOptions = {
         threshold: 0.5 // Ativa quando 50% da seção estiver na tela
     };
@@ -25,5 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
+    // ---MENU Cellphone Function---
+    const menu = document.querySelector('#mobile-menu');
+    const menuLinks = document.querySelector('.nav-list');
+
+    menu.addEventListener('click', function() {
+     // toggle() adiciona a classe se ela não existe, e remove se existe
+    menu.classList.toggle('is-active');
+    menuLinks.classList.toggle('active');
+});
 
 });
