@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // INTRO Animation
     window.addEventListener('load', () => {
         const loader = document.getElementById('loader');
         // Pequeno delay para garantir que o usuário veja a animação
@@ -8,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
 
-    const sections = document.querySelectorAll('.full-page');
 
+    const sections = document.querySelectorAll('.full-page');
     const observerOptions = {
         threshold: 0.5 // Ativa quando 50% da seção estiver na tela
     };
@@ -34,14 +35,30 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
+
+
     // ---MENU Cellphone Function---
     const menu = document.querySelector('#mobile-menu');
-    const menuLinks = document.querySelector('.nav-list');
+    const navList = document.querySelector('.nav-list');
 
     menu.addEventListener('click', function() {
      // toggle() adiciona a classe se ela não existe, e remove se existe
     menu.classList.toggle('is-active');
-    menuLinks.classList.toggle('active');
-});
+    navList.classList.toggle('active');
+    });
+    
+    // Quando o menu abre, animamos os itens individualmente
+    menu.addEventListener('click', () => {
+        const navItems = document.querySelectorAll('.nav-list li');
+        
+        navItems.forEach((item, index) => {
+            if (navList.classList.contains('active')) {
+                // Cria um atraso cascata: o primeiro entra, depois o segundo...
+                item.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+            } else {
+                item.style.animation = '';
+            }
+        });
+    });
 
 });
