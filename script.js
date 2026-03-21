@@ -1,26 +1,18 @@
-// 1. Espera o HTML carregar totalmente antes de rodar o código
 document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.full-page');
+    const body = document.body;
 
-    // Selecionamos todos os cards de equipes
-    const cards = document.querySelectorAll('.team-card');
-
-    // 2. Função para observar quando o card aparece na tela (Intersection Observer)
-    const observer = new IntersectionObserver((entries) => {
+    const colorObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            // Se o card estiver visível na tela...
             if (entry.isIntersecting) {
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
+                // Se a seção tiver um data-color, usa ele. Se não (Intro), volta pro cinza.
+                const newColor = entry.target.getAttribute('data-color') || '#1a1a1a';
+                body.style.backgroundColor = newColor;
             }
         });
-    }, { threshold: 0.1 }); // Começa a animação quando 10% do card aparece
+    }, { threshold: 0.4 }); // Ativa quando 40% da tela estiver à amostra;
 
-    // 3. Aplicamos o estado inicial e o observador em cada card
-    cards.forEach(card => {
-        card.style.opacity = "0";
-        card.style.transform = "translateY(50px)";
-        card.style.transition = "all 0.8s ease-out";
-        observer.observe(card);
+    sections.forEach(section => {
+        colorObserver.observe(section);
     });
-
 });

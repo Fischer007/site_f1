@@ -1,135 +1,194 @@
-/* 1. Importando uma fonte moderna do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
 
-/* 2. Variáveis de Cor (Facilita a manutenção) */
 :root {
     --f1-red: #e10600;
-    --dark-grey: #1a1a1a;
-    /* Cores para o efeito de vidro */
     --glass: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.1);
 }
 
-/* 3. Reset Básico (Remove margens padrão do navegador) */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Configuração do Scroll 'Imã' */
+html {
+    scroll-snap-type: y inherit;
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     color: white;
-    min-height: 100vh;
-    background: radial-gradient(circle at top right, #3d0505, #0b0b0b);
-    background-attachment: fixed;
+    background-color: #1a1a1a; /* Cor inicial */
+    transition: background-color 0.8s ease; /* Transição suave da cor de fundo */
 }
 
-/* 4. Header Estilo Webflow */
+/* Header Fixo e Transparente */
 header {
+    position: fixed;
+    top: 0;
+    width: 100%;
     height: 10vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 2em 5%;
-    border-bottom: 1px solid #333;
+    padding: 0 5%;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--glass-border);
 }
 
 header h1 {
-    font-weight: 900;
+    font-size: 1.2rem;
     text-transform: uppercase;
-    letter-spacing: -1px;
-    font-size: 1.5em;
+    letter-spacing: 2px;
 }
 
 nav ul {
     display: flex;
     list-style: none;
-    gap: 2em;
+    gap: 20px;
 }
 
 nav a {
     color: white;
     text-decoration: none;
     font-weight: 700;
-    transition: 0.3s;
+    font-size: 0.9rem;
 }
 
-nav a:hover {
-    color: var(--f1-red);
+/* Seções de Tela Cheia */
+.full-page {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start; /* Gruda no topo */
+    padding: 20px;
 }
 
-/* 5. Grid de Equipes (Página Principal) */
-#equipes {
-    padding: 5em 5%;
-}
-
-#equipes h2 {
-    text-align: center;
-    font-size: 3em;
-    padding: 2em 0;
+/* Título de Introdução */
+.intro h2 {
+    font-size: 5vw; /* Tamanho responsivo */
     text-transform: uppercase;
-    letter-spacing: 1px;
-    /*margin-bottom: 3em;*/
+    font-weight: 900;
+    letter-spacing: -2px;
 }
 
-/* --- O segredo do alinhamento "Um ao lado do outro" --- */
-.team-grid {
-    display: flex; /* Faz os itens ficarem em linha */
-    flex-wrap: wrap; /* Se não couber na tela, ele joga para baixo (importante para celular) */
-    justify-content: center; /* Centraliza os cards */
-    gap: 2em; /* Espaço entre os cards */
-    padding: 0 5%;
+/* Conteúdo do Time (O "Card" Gigante) */
+/* Removemos o estilo de "caixa" e deixamos o conteúdo livre */
+.team-content {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    /* Criamos 2 colunas: uma para texto e outra para a imagem do carro */
+    grid-template-columns: 1fr 1fr; 
+    align-items: center;
+    padding: 0 10%;
+    gap: 50px;
 }
 
-/* --- Card Estilo Vidro Fosco --- */
-.team-card {
-    flex: 1; /* Faz os cards tentarem ocupar o mesmo espaço */
-    min-width: 300px; /* Não deixa o card ficar espremido demais */
-    max-width: 400px; /* Não deixa o card ficar largo demais em telas gigantes */
-    
-    background: var(--glass);
-    backdrop-filter: blur(20px); /* O desfoque do vidro */
-    
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    padding: 3em 2em;
-    text-align: center;
-    transition: all 0.4s ease;
+/* Estilo para o lado do Texto */
+.team-info {
+    text-align: left; /* Alinhado à esquerda para um ar mais editorial */
+    z-index: 2;
 }
 
-.team-card:hover {
-    transform: translateY(-10px);
-    background: rgba(225, 6, 0, 0.1); /* Fica levemente avermelhado no hover */
-    border-color: var(--f1-red);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+.team-info h3 {
+    font-size: clamp(3em, 8vw, 6em); /* Fonte gigante que se ajusta à tela */
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.9;
+    margin-bottom: 20px;
 }
 
-.team-card img {
-    width: 100px;
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
-    margin-bottom: 1.5rem;
+.team-info p {
+    font-size: 1.2rem;
+    max-width: 450px;
+    margin-bottom: 40px;
+    opacity: 0.9;
 }
 
+/* Estilo para a imagem (O Carro ou Logo Gigante) */
+.team-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.team-image img {
+    width: 120%; /* Faz a imagem "transbordar" um pouco para dar estilo */
+    max-width: 800px;
+    filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
+    transition: transform 0.5s ease;
+}
+
+/* Efeito de movimento na imagem quando passamos o mouse na seção */
+.team-section:hover .team-image img {
+    transform: scale(1.05) rotate(-2deg);
+}
+
+/* Responsividade: No celular, vira uma coluna só */
+@media (max-width: 900px) {
+    .team-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 10vh;
+    }
+    .team-info {
+        text-align: center;
+    }
+    .team-info p {
+        margin: 0 auto 30px auto;
+    }
+    .team-image img {
+        width: 100%;
+    }
+}
+
+.team-content img {
+    width: 150px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+}
+
+.team-content h3 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.team-content p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 30px;
+}
+
+/* Botão Moderno */
 .btn-details {
     display: inline-block;
-    margin-top: 2em;
-    padding: 0.8em 2em;
+    padding: 15px 40px;
     background: var(--f1-red);
     color: white;
     text-decoration: none;
     border-radius: 50px;
     font-weight: bold;
-    transition: 0.3s;
+    text-transform: uppercase;
+    transition: 0.3s ease;
 }
 
 .btn-details:hover {
-    box-shadow: 0 0 20px var(--f1-red);
-    letter-spacing: 1px;
+    transform: scale(1.05);
+    box-shadow: 0 0 30px var(--f1-red);
 }
 
 footer {
+    padding: 20px;
     text-align: center;
-    background-color: rgba(44, 39, 39, 0.745);
+    background: rgba(0,0,0,0.5);
+    scroll-snap-align: end;
 }
