@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     // ---MENU Cellphone Function---
     const menu = document.querySelector('#mobile-menu');
     const menuLinks = document.querySelector('.nav-list');
@@ -15,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 1. Selecionamos os contadores
     const counters = document.querySelectorAll('.counter');
-    
     // 2. Função que faz o número subir
     const startCounter = (el) => {
         const target = +el.getAttribute('data-target');
