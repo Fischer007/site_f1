@@ -126,9 +126,12 @@ header {
 }
 
 header h1 {
-    font-size: 1.2rem;
+    font-size: 2em;
     text-transform: uppercase;
+    font-weight: 800;
+    font-style: italic;
     letter-spacing: 2px;
+    color: var(--f1-red);
 }
 
 nav ul {
@@ -207,7 +210,7 @@ nav a {
     color: transparent;
     -webkit-text-stroke: 1px #fff;
     white-space: nowrap;
-    padding-left: 100%; /* Empurra o início para fora da tela */
+    padding-left: 10%; /* Empurra o início para fora da tela */
     animation: marquee-run 25s linear infinite;
 }
 
@@ -224,7 +227,7 @@ nav a {
 }
 
 .main-title {
-    font-size: clamp(5rem, 18vw, 12rem);
+    font-size: clamp(5em, 18vw, 12rem);
     font-weight: 900;
     line-height: 0.8;
     letter-spacing: -8px; /* Deixa as letras "coladas" - estilo F1 */
@@ -299,7 +302,7 @@ nav a {
     grid-template-columns: 1fr 1fr; 
     align-items: center;
     padding: 0 10%;
-    gap: 50px;
+    gap: 1em;
 }
 
 /* Estilo para o lado do Texto */
