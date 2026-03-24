@@ -115,6 +115,7 @@ header {
     top: 0;
     width: 100%;
     height: 10vh;
+    min-height: 60px; /* Minimum height for mobile */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -132,6 +133,8 @@ header h1 {
     font-style: italic;
     letter-spacing: 2px;
     color: var(--f1-red);
+    flex: 1;
+    text-align: center;
 }
 
 nav ul {
@@ -157,6 +160,51 @@ nav a {
     align-items: center;
     scroll-snap-align: start; /* Gruda no topo */
     padding: 20px;
+}
+
+/* Team sections with gradients */
+.team-section[data-color="#e10600"] {
+    background: linear-gradient(135deg, #e10600, #ff4d4d);
+}
+
+.team-section[data-color="#00d2be"] {
+    background: linear-gradient(135deg, #00d2be, #00f5e1);
+}
+
+.team-section[data-color="#ff8700"] {
+    background: linear-gradient(135deg, #ff8700, #ffb84d);
+}
+
+.team-section[data-color="#ffffff"] {
+    background: linear-gradient(135deg, #ffffff, #f0f0f0);
+}
+
+.team-section[data-color="#1e41ff"] {
+    background: linear-gradient(135deg, #1e41ff, #4d5eff);
+}
+
+.team-section[data-color="#2b4562"] {
+    background: linear-gradient(135deg, #2b4562, #4d6b8a);
+}
+
+.team-section[data-color="#0090ff"] {
+    background: linear-gradient(135deg, #0090ff, #4db8ff);
+}
+
+.team-section[data-color="#000000"] {
+    background: linear-gradient(135deg, #000000, #333333);
+}
+
+.team-section[data-color="#005aff"] {
+    background: linear-gradient(135deg, #005aff, #4d8aff);
+}
+
+.team-section[data-color="#a6192e"] {
+    background: linear-gradient(135deg, #a6192e, #d43d4d);
+}
+
+.team-section[data-color="#006f62"] {
+    background: linear-gradient(135deg, #006f62, #4d9a8a);
 }
 
 /* --- INTRO RE-DESIGN --- */
@@ -364,7 +412,7 @@ nav a {
         padding: 20px;
         border-radius: 15px;
         border: 1px solid rgba(255,255,255,0.1);
-        width: 500px;
+        width: 700px; /* Increased width */
         
         /* Estado inicial: Invisível */
         opacity: 0;
@@ -381,23 +429,31 @@ nav a {
 
     .menu-teams-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for better fit */
         gap: 15px;
+    }
+
+    .menu-toggle {
+        display: none; /* Hide on desktop */
     }
 }
 
 
 /* --- TUDO PARA MOBILE E TABLETS (Abaixo de 900px) --- */
 @media (max-width: 900px) {
-    .mega-menu {
-        display: block; /* No mobile, ele já faz parte do scroll do menu */
-        margin-top: 20px;
+    .nav-list {
+        display: none; /* Hide nav-list on mobile */
     }
+
+    .menu-toggle {
+        display: block; /* Show menu toggle on mobile */
+    }
+
     /* 1. Ajuste das Seções de Times (Coluna Única) */
     .team-content {
         grid-template-columns: 1fr;
         text-align: center;
-        padding-top: 10vh;
+        padding: 10vh 5% 5% 5%; /* Better padding for mobile */
         gap: 20px;
     }
     
@@ -408,16 +464,20 @@ nav a {
     
     .team-info p {
         margin: 0 auto 30px auto;
+        font-size: 1rem; /* Smaller font for mobile */
+        max-width: 100%; /* Allow full width on mobile */
     }
     
     .team-image {
-        order: 90%;
-        max-width: 350px; /* Imagem em cima no mobile */
+        order: 1; /* Image on top for mobile */
+        max-width: 100%;
+        height: auto;
     }
 
     .team-image img {
-        width: 100%;
-        max-width: 400px; /* Evita que o carro fique gigante demais no celular */
+        width: 100%; /* Make image responsive */
+        max-width: 350px;
+        height: auto;
     }
 
     nav {
@@ -450,23 +510,52 @@ nav a {
     .nav-list.active {
         transform: translateX(0);
         visibility: visible;
+        display: flex !important;
+    }
+
+    /* Close button */
+    .close-menu-mobile {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        list-style: none;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2em;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 50%;
+        transition: background 0.3s;
+    }
+
+    .close-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
     }
 
     /* Links do Menu */
     .nav-list a {
-        font-size: 2.5em; /* Ajustei para não quebrar em telas menores */
+        font-size: 2em; /* Slightly smaller for better fit */
         font-weight: 900;
         text-transform: uppercase;
         color: #fff;
         text-decoration: none;
         letter-spacing: -1px;
+        padding: 15px 20px; /* Add padding for larger touch targets */
+        display: block; /* Make full width clickable */
+        border-radius: 10px; /* Rounded corners */
+        transition: all 0.3s ease;
     }
 
     /* Efeito de Hover/Toque */
     .nav-list a:active, .nav-list a:hover {
         color: var(--f1-red);
-        transform: skewX(-10deg); /* Inclinação estilo corrida */
-        padding-left: 20px;
+        transform: skewX(-5deg) scale(1.05); /* Less skew, add scale for mobile */
+        background: rgba(255, 255, 255, 0.1); /* Background on touch */
+        padding-left: 30px;
     }
 
     /* Linha decorativa atrás dos links */
@@ -530,18 +619,20 @@ nav a {
         background: rgba(255, 255, 255, 0.05);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 10px;
-        padding: 15px;
+        padding: 20px; /* Larger padding for touch */
         text-align: center;
         text-decoration: none;
         transition: 0.3s;
         display: flex;
         flex-direction: column;
         align-items: center;
+        min-height: 120px; /* Minimum height for consistency */
     }
 
     .menu-team-card img {
-        width: 100%;
-        height: auto;
+        width: 80px; /* Fixed size for mobile */
+        height: 60px;
+        object-fit: contain;
         filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
         transition: 0.3s;
     }
@@ -555,20 +646,26 @@ nav a {
     }
 
     /* Efeito de seleção */
-    .menu-team-card:hover {
+    .menu-team-card:hover, .menu-team-card:active {
         background: rgba(255, 255, 255, 0.1);
         border-color: var(--clr); /* Usa a cor definida no HTML */
         transform: scale(1.05);
     }
 
-    .menu-team-card:hover img {
+    .menu-team-card:hover img, .menu-team-card:active img {
         transform: translateY(-5px);
     }
 
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
-
-
-.team-content img {
     width: 150px;
     margin-bottom: 20px;
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
@@ -608,4 +705,157 @@ footer {
     text-align: center;
     background: rgba(0,0,0,0.5);
     scroll-snap-align: end;
+}
+
+/* Mobile-first enhancements */
+@media (max-width: 900px) {
+    /* Larger touch targets */
+    .btn-details {
+        padding: 20px 50px;
+        font-size: 1.2em;
+    }
+
+    .menu-toggle {
+        padding: 15px;
+    }
+
+    .close-btn {
+        padding: 15px;
+        font-size: 2em;
+    }
+
+    /* Better spacing for mobile */
+    .team-info h3 {
+        font-size: clamp(2em, 6vw, 4em);
+    }
+
+    .team-info p {
+        font-size: 1.4rem;
+        margin-bottom: 50px;
+    }
+
+    /* Mobile tips section */
+    #mobile-tips .team-info ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    #mobile-tips .team-info li {
+        margin-bottom: 15px;
+        font-size: 1.2em;
+    }
+
+    /* Improve intro section for mobile */
+    .intro-content {
+        padding: 0 20px;
+    }
+
+    .main-title {
+        font-size: clamp(3em, 15vw, 8rem); /* Better scaling for mobile */
+    }
+
+    .sub-title {
+        font-size: clamp(1em, 5vw, 2em);
+        letter-spacing: 5px; /* Less spacing on mobile */
+    }
+
+    /* Better button sizing */
+    .btn-details {
+        padding: 18px 40px;
+        font-size: 1.1em;
+        min-width: 200px;
+    }
+
+    /* Header adjustments for very small screens */
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    .menu-toggle {
+        padding: 10px;
+    }
+
+    .close-btn {
+        padding: 12px;
+        font-size: 1.5em;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    header {
+        padding: 0 15px;
+    }
+
+    header h1 {
+        font-size: 1.2em;
+    }
+
+    .intro-content {
+        padding: 0 15px;
+    }
+
+    .main-title {
+        font-size: clamp(2.5em, 18vw, 6rem);
+    }
+
+    .sub-title {
+        font-size: clamp(0.8em, 6vw, 1.5em);
+        letter-spacing: 3px;
+    }
+
+    .team-content {
+        padding: 12vh 10px 20px 10px;
+        gap: 15px;
+    }
+
+    .team-info h3 {
+        font-size: clamp(1.8em, 8vw, 3em);
+        margin-bottom: 15px;
+    }
+
+    .team-info p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+
+    .team-image img {
+        max-width: 280px;
+    }
+
+    .btn-details {
+        padding: 15px 30px;
+        font-size: 1em;
+        min-width: 180px;
+    }
+
+    /* Mobile menu adjustments */
+    .nav-list a {
+        font-size: 1.5em;
+        padding: 12px 15px;
+    }
+
+    .menu-teams-grid {
+        grid-template-columns: 1fr; /* Single column for very small screens */
+        gap: 10px;
+    }
+
+    .menu-team-card {
+        padding: 15px;
+        min-height: 100px;
+    }
+
+    .menu-team-card img {
+        width: 60px;
+        height: 45px;
+    }
+
+    .menu-team-card span {
+        font-size: 0.8rem;
+    }
+
+    footer {
+        padding: 15px 10px;
+        font-size: 0.9em;
+    }
 }

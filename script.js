@@ -40,11 +40,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // ---MENU Cellphone Function---
     const menu = document.querySelector('#mobile-menu');
     const navList = document.querySelector('.nav-list');
+    const closeMenu = document.querySelector('#close-menu');
+    const body = document.body;
 
-    menu.addEventListener('click', function() {
-     // toggle() adiciona a classe se ela não existe, e remove se existe
-    menu.classList.toggle('is-active');
-    navList.classList.toggle('active');
+    const toggleMenu = () => {
+        menu.classList.toggle('is-active');
+        navList.classList.toggle('active');
+        // Prevent body scroll when menu is open
+        if (navList.classList.contains('active')) {
+            body.style.overflow = 'hidden';
+            body.style.position = 'fixed'; // Prevent background scroll on iOS
+            body.style.width = '100%';
+        } else {
+            body.style.overflow = '';
+            body.style.position = '';
+            body.style.width = '';
+        }
+    };
+
+    menu.addEventListener('click', toggleMenu);
+    closeMenu.addEventListener('click', toggleMenu);
+
+    // Close menu when clicking outside
+    navList.addEventListener('click', (e) => {
+        if (e.target === navList) {
+            toggleMenu();
+        }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navList.classList.contains('active')) {
+            toggleMenu();
+        }
     });
     
     // Quando o menu abre, animamos os itens individualmente
@@ -60,5 +88,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Smooth scroll for mobile tips link
+    const mobileTipsLink = document.querySelector('a[href="#mobile-tips"]');
+    if (mobileTipsLink) {
+        mobileTipsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.getElementById('mobile-tips');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+            // Close mobile menu if open
+            if (navList.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    }
+
+    // Improve scroll performance on mobile
+    let scrollTimeout;
+    const handleScroll = () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            // Any scroll-based logic can go here
+        }, 100);
+    };
+
+    // Use passive listeners for better performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
 });
